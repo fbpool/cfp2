@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1st Annual 2025 College Playoff Bracket</title>
+<link rel="shortcut icon" href="https://dl.dropboxusercontent.com/s/d8kuo01repoyfif/favicon.ico?raw=1" />
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container for the bracket and headings */
+.bracket-container {
+    display: grid;
+    grid-template-columns: repeat(4, 240px);
+    gap: 40px;
+    justify-content: start; /* align to left */
+    overflow-x: auto;       /* allow horizontal scrolling on small screens */
+    padding-bottom: 20px;   /* optional, adds some space for scroll */
+}
+
+/* Headings row */
+.headings {
+    display: contents;
+}
+
+.heading {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 1.1em;
+}
+
+.subheading {
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Each round is a vertical column */
+.round {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Uniform game card box */
+.game {
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+/* Highlight if not selected */
+.game.missing {
+    border-color: red;
+}
+
+/* Uniform team cells */
+.team {
+    height: 42px;
+    line-height: 42px;
+    background: #eee;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-top: 6px;
+    padding-left: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.team:first-child {
+    margin-top: 0;
+}
+
+.team:hover {
+    background: #d4ffd4;
+}
+
+.selected {
+    background: #9aff9a !important;
+    border-color: #3c8c3c !important;
+}
+
+/* Each round is a vertical column */
+.round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* Form styling */
+.form-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+input[type="text"], input[type="email"], input[type="number"] {
+    padding: 8px;
+    width: 220px;
+    margin: 5px;
+    font-size: 1em;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#validationMessage {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<h1>1st Annual 2025 College Playoff Bracket</h1>
+<p>Pick the winner of each game. The most correct responses wins. $20 per sheet and you can play as many sheets as you like. Payouts will be determined based on the number of people in the pool. Payments can be sent to:
+ Venmo @dan-giusti | Apple Pay 617-312-8199 | Cashapp namg81<br><br>
+
+<div class="bracket-container">
+
+  <!-- Headings row -->
+  <div class="headings">
+    <div class="heading">Round 1</div>
+    <div class="heading">Quarterfinals</div>
+    <div class="heading">Semifinals<br /></div>
+    <div class="heading">National Championship</div>
+  </div>
+
+  <!-- ROUND 1 -->
+	<div class="round">
+		<div class="game" data-game="R1G1">
+			<div class="team" onclick="selectTeam('R1G1','Oregon')">#5 Oregon</div>
+			<div class="team" onclick="selectTeam('R1G1','James Madison')">#12 James Madison</div>
+		</div>
+	
+		<!-- Oklahoma vs Alabama is now R1G2 -->
+		<div class="game" data-game="R1G2">
+			<div class="team" onclick="selectTeam('R1G2','Oklahoma')">#8 Oklahoma</div>
+			<div class="team" onclick="selectTeam('R1G2','Alabama')">#9 Alabama</div>
+		</div>
+	
+		<div class="game" data-game="R1G3">
+			<div class="team" onclick="selectTeam('R1G3','Ole Miss')">#6 Ole Miss</div>
+			<div class="team" onclick="selectTeam('R1G3','Tulane')">#11 Tulane</div>
+		</div>
+	
+		<div class="game" data-game="R1G4">
+			<div class="team" onclick="selectTeam('R1G4','Texas A&M')">#7 Texas A&M</div>
+			<div class="team" onclick="selectTeam('R1G4','Miami')">#10 Miami</div>
+		</div>
+	</div>
+
+
+  <!-- QUARTERFINALS -->
+	<div class="round">
+		<div class="game" data-game="QF1">
+			<div class="team" id="QF1T1" onclick="selectTeam('QF1', getWinnerName('R1G1'))"></div>
+			<div class="team" onclick="selectTeam('QF1','Texas Tech')">#4 Texas Tech</div>
+		</div>
+	
+		<!-- Indiana game is now QF2 -->
+		<div class="game" data-game="QF2">
+			<div class="team" id="QF2T1" onclick="selectTeam('QF2', getWinnerName('R1G2'))"></div>
+			<div class="team" onclick="selectTeam('QF2','Indiana')">#1 Indiana</div>
+		</div>
+	
+		<div class="game" data-game="QF3">
+			<div class="team" id="QF3T1" onclick="selectTeam('QF3', getWinnerName('R1G3'))"></div>
+			<div class="team" onclick="selectTeam('QF3','Georgia')">#3 Georgia</div>
+		</div>
+	
+		<div class="game" data-game="QF4">
+			<div class="team" id="QF4T1" onclick="selectTeam('QF4', getWinnerName('R1G4'))"></div>
+			<div class="team" onclick="selectTeam('QF4','Ohio State')">#2 Ohio State</div>
+		</div>
+	</div>
+
+
+  <!-- SEMIFINALS -->
+  <div class="round">
+      <div class="spacer"></div>
+      <div class="game" data-game="SF1">
+          <div class="team" id="SF1T1" onclick="selectTeam('SF1', getWinnerName('QF1'))"></div>
+          <div class="team" id="SF1T2" onclick="selectTeam('SF1', getWinnerName('QF2'))"></div>
+      </div>
+      <div class="game" data-game="SF2">
+          <div class="team" id="SF2T1" onclick="selectTeam('SF2', getWinnerName('QF3'))"></div>
+          <div class="team" id="SF2T2" onclick="selectTeam('SF2', getWinnerName('QF4'))"></div>
+      </div>
+      <div class="spacer"></div>
+  </div>
+
+  <!-- CHAMPIONSHIP -->
+  <div class="round">
+      <div class="spacer"></div>
+      <div class="game" data-game="CH">
+          <div class="team" id="CHT1" onclick="selectTeam('CH', getWinnerName('SF1'))"></div>
+          <div class="team" id="CHT2" onclick="selectTeam('CH', getWinnerName('SF2'))"></div>
+      </div>
+      <div class="spacer"></div>
+  </div>
+
+</div>
+
+<!-- Validation message -->
+<div id="validationMessage"></div>
+
+<!-- FORM -->
+<div class="form-container">
+    <input type="number" id="TP" placeholder="Championship Total Points" min="0" max="999" />
+    <br/>
+    <input type="text" id="name" placeholder="Name" />
+    <input type="email" id="email" placeholder="Email" />
+    <br/>
+    <button onclick="validateAndSubmit()">Submit</button>
+</div>
+
+<script>
+const teams = {
+    "Indiana": {seed: 1, name: "Indiana"},
+    "Ohio State": {seed: 2, name: "Ohio State"},
+    "Georgia": {seed: 3, name: "Georgia"},
+    "Texas Tech": {seed: 4, name: "Texas Tech"},
+    "Oregon": {seed: 5, name: "Oregon"},
+    "Ole Miss": {seed: 6, name: "Ole Miss"},
+    "Texas A&M": {seed: 7, name: "Texas A&M"},
+    "Oklahoma": {seed: 8, name: "Oklahoma"},
+    "Alabama": {seed: 9, name: "Alabama"},
+    "Miami": {seed: 10, name: "Miami"},
+    "Tulane": {seed: 11, name: "Tulane"},
+    "James Madison": {seed: 12, name: "James Madison"}
+};
+
+let winners = {};
+let triedSubmit = false;
+
+const nextGames = {
+    "R1G1": ["QF1T1"],
+    "R1G2": ["QF2T1"],
+    "R1G3": ["QF3T1"],
+    "R1G4": ["QF4T1"],
+    "QF1": ["SF1T1"],
+    "QF2": ["SF1T2"],
+    "QF3": ["SF2T1"],
+    "QF4": ["SF2T2"],
+    "SF1": ["CHT1"],
+    "SF2": ["CHT2"]
+};
+
+function getWinner(game) { return winners[game] || ""; }
+function getSeededName(teamName) { if (!teamName) return ""; return teams[teamName] ? "#" + teams[teamName].seed + " " + teams[teamName].name : teamName; }
+function getWinnerName(game) { return getWinner(game); }
+
+function clearDownstream(game) {
+    if (!nextGames[game]) return;
+
+    const advancingTeam = winners[game];
+
+    nextGames[game].forEach(slotId => {
+        const slotEl = document.getElementById(slotId);
+        if (!slotEl) return;
+
+        const parentGameEl = slotEl.closest('.game');
+        const parentGame = parentGameEl.dataset.game;
+
+        slotEl.textContent = getSeededName(advancingTeam);
+
+        if (winners[parentGame]) {
+            const currentPick = winners[parentGame];
+
+            if (currentPick === advancingTeam) {
+                return;
+            }
+
+            const fixedTeamsInGame = getFixedTeamsInGame(parentGame);
+            if (fixedTeamsInGame.includes(currentPick)) {
+                return;
+            }
+
+            const sourceGame = getSourceGameForSlot(slotId);
+            if (sourceGame === game && currentPick !== advancingTeam) {
+                delete winners[parentGame];
+                clearDownstream(parentGame);
+            }
+        }
+    });
+}
+
+function getFixedTeamsInGame(game) {
+    const fixed = [];
+    const gameEl = document.querySelector(`[data-game="${game}"]`);
+    if (!gameEl) return fixed;
+
+    gameEl.querySelectorAll('.team').forEach(teamEl => {
+        const text = teamEl.textContent.trim();
+        if (text && !text.includes('→') && text.match(/^#\d+/)) {
+            const teamName = text.replace(/^#\d+\s+/, '');
+            if (!teamName.includes('getWinnerName')) {
+                fixed.push(teamName);
+            }
+        }
+    });
+    return fixed;
+}
+
+function getSourceGameForSlot(slotId) {
+    const map = {
+        "QF1T1": "R1G1",
+        "QF2T1": "R1G2",
+        "QF3T1": "R1G3",
+        "QF4T1": "R1G4",
+        "SF1T1": "QF1",
+        "SF1T2": "QF2",
+        "SF2T1": "QF3",
+        "SF2T2": "QF4",
+        "CHT1": "SF1",
+        "CHT2": "SF2"
+    };
+    return map[slotId] || null;
+}
+
+function selectTeam(game, team) {
+    if (!team) return;
+
+    const oldWinner = winners[game];
+    if (oldWinner !== team) {
+        winners[game] = team;
+        clearDownstream(game);
+        renderBracket();
+        updateValidationMessage();
+    } else if (oldWinner === team) {
+        renderBracket();
+    }
+}
+
+function renderBracket() {
+    document.querySelectorAll('.team').forEach(el => el.classList.remove('selected'));
+
+    for (const [game, winner] of Object.entries(winners)) {
+        const gameBox = document.querySelector(`[data-game="${game}"]`);
+        if (!gameBox) continue;
+        [...gameBox.querySelectorAll('.team')].forEach(el => {
+            if (el.textContent === getSeededName(winner)) {
+                el.classList.add('selected');
+            }
+        });
+    }
+
+    document.getElementById("QF1T1").textContent = getSeededName(getWinner("R1G1"));
+    document.getElementById("QF2T1").textContent = getSeededName(getWinner("R1G2"));
+    document.getElementById("QF3T1").textContent = getSeededName(getWinner("R1G3"));
+    document.getElementById("QF4T1").textContent = getSeededName(getWinner("R1G4"));
+
+    document.getElementById("SF1T1").textContent = getSeededName(getWinner("QF1"));
+    document.getElementById("SF1T2").textContent = getSeededName(getWinner("QF2"));
+    document.getElementById("SF2T1").textContent = getSeededName(getWinner("QF3"));
+    document.getElementById("SF2T2").textContent = getSeededName(getWinner("QF4"));
+
+    document.getElementById("CHT1").textContent = getSeededName(getWinner("SF1"));
+    document.getElementById("CHT2").textContent = getSeededName(getWinner("SF2"));
+}
+
+function updateValidationMessage() {
+    if (!triedSubmit) return;
+
+    const allGames = ["R1G1","R1G2","R1G3","R1G4","QF1","QF2","QF3","QF4","SF1","SF2","CH"];
+    const validationMessage = document.getElementById("validationMessage");
+    validationMessage.textContent = "";
+    validationMessage.style.color = "red";
+
+    let valid = true;
+
+    allGames.forEach(g => {
+        const el = document.querySelector(`[data-game="${g}"]`);
+        el.classList.remove("missing");
+    });
+
+    const missingGames = [];
+    allGames.forEach(g => {
+        if (!winners[g]) {
+            document.querySelector(`[data-game="${g}"]`).classList.add("missing");
+            missingGames.push(g);
+            valid = false;
+        }
+    });
+
+    const tp = document.getElementById("TP").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    if (!tp || !name || !email) valid = false;
+
+    if (!valid) {
+        let msg = "";
+        if (missingGames.length > 0) msg += "Please select winners for all games. ";
+        if (!tp || !name || !email) msg += "Please enter Total Points, Name, and Email.";
+        validationMessage.textContent = msg;
+    } else {
+        validationMessage.style.color = "green";
+        validationMessage.textContent = "All selections made! Ready to submit.";
+    }
+}
+
+// Google Form entry IDs
+const entryIDs = {
+    "name": "257403214",
+    "email": "710747034",
+    "R1G1": "3192731",
+    "R1G2": "228298947",
+    "R1G3": "211151388",
+    "R1G4": "1001170552",
+    "QF1": "1411199850",
+    "QF2": "367488223",
+    "QF3": "802216188",
+    "QF4": "7428646",
+    "SF1": "29966834",
+    "SF2": "1434513780",
+    "CH": "111311380",
+    "TP": "1824678700"
+};
+
+// Remove this line because it's already declared earlier:
+// let triedSubmit = false;
+
+let lastSubmissionData = null; // NEW: track last submission
+
+async function validateAndSubmit() {
+    triedSubmit = true; // reuse existing variable
+    updateValidationMessage();
+    const validationMessage = document.getElementById("validationMessage");
+    const submitButton = document.querySelector("button");
+
+    if (validationMessage.style.color !== "green") return;
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const tp = document.getElementById("TP").value.trim();
+
+    // Prepare current submission data
+    const currentData = {
+        name: name,
+        email: email,
+        tp: tp,
+        winners: { ...winners }
+    };
+
+    // Check if nothing changed since last submission
+    if (lastSubmissionData && JSON.stringify(currentData) === JSON.stringify(lastSubmissionData)) {
+        validationMessage.style.color = "orange";
+        validationMessage.textContent = "Already submitted. Make changes to submit again.";
+        return;
+    }
+
+    // Construct payload for Google Form
+    const formPayload = {
+        [`entry.${entryIDs.name}`]: name,
+        [`entry.${entryIDs.email}`]: email,
+        [`entry.${entryIDs.TP}`]: tp
+    };
+
+    for (const [game, winner] of Object.entries(winners)) {
+        if (entryIDs[game]) {
+            formPayload[`entry.${entryIDs[game]}`] = winner;
+        }
+    }
+
+    const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSe6ak-5Hl4Cui5nGmhZWNtipwdP2OpskMtST3lH_d-rNDylqw/formResponse";
+
+    try {
+        await fetch(googleFormURL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formPayload)
+        });
+
+        lastSubmissionData = currentData; // save last submission
+        validationMessage.style.color = "green";
+        validationMessage.textContent = "Submission sent! Good luck!";
+        submitButton.disabled = true; // disable until changes
+    } catch (err) {
+        validationMessage.style.color = "red";
+        validationMessage.textContent = "Failed to submit. Try again.";
+        console.error(err);
+    }
+}
+
+// Re-enable submit button if any change occurs
+["TP","name","email"].forEach(id => {
+    document.getElementById(id).addEventListener("input", () => {
+        document.querySelector("button").disabled = false;
+        document.getElementById("validationMessage").textContent = "";
+    });
+});
+
+document.querySelectorAll(".team").forEach(teamEl => {
+    teamEl.addEventListener("click", () => {
+        document.querySelector("button").disabled = false;
+        document.getElementById("validationMessage").textContent = "";
+    });
+});
+
+</script>
+</body>
+</html>
